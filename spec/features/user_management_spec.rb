@@ -24,11 +24,22 @@ feature 'User sign up' do
     expect(current_path).to eq('/users')
     expect(page).to have_content('Email has an invalid format')
   end
-  
+
   scenario 'I cannot sign up without an email address' do
     expect { sign_up(email: nil) }.not_to change(User, :count)
     expect(current_path).to eq('/users')
     expect(page).to have_content('Email must not be blank')
   end
+end
 
+feature 'User log in' do
+  let!(:user) do
+    User.create(email: 'person@example.com', password: 'whatever2000', password_confirmation: 'whatever2000')
+  end
+
+
+  scenario 'as existing user' do
+    sign_in(email: user.email, password: user.password)
+    expect(page).to have_content "Welcome, person@example.com"
+  end
 end
