@@ -11,6 +11,10 @@
     <% if flash[:notice] %>
     <div id='notice'><%= flash[:notice] %></div>
     <% end %>
+
+  <form action='/sessions/sign_out' method='get'>
+    <input type='Submit' value='Sign Out'>
+  </form>
     <%= yield %>
   </body>
 </html>

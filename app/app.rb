@@ -69,7 +69,12 @@ class BookmarkManager < Sinatra::Base
       flash.now[:errors] = @user.errors.full_messages
       erb :'users/log_in'
     end
+  end
 
+  get '/sessions/sign_out' do
+    session[:user_id] = nil
+    flash[:sign_out] = 'Thanks for visting!'
+    redirect '/sessions/new'
   end
 
   helpers do
